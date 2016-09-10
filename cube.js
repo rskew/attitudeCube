@@ -328,4 +328,3 @@ window.addEventListener('deviceorientation', handleCompassEvent, false);
 window.setInterval(drawCube, 2);
 window.setInterval(updateAttitude, 5);
 //window.setInterval(debug,20);
-
