@@ -1,0 +1,83 @@
+<html>
+	<head>
+	</head>
+	<body>
+        <div id="SensorReadings">
+		    <ax>Accelerometer x:</ax>
+		    <br>
+		    <ax id="accel_x"></ax>
+		    <br>
+		    <ay>Accelerometer y:</ay>
+		    <br>
+		    <ay id="accel_y"></ay>
+		    <br>
+		    <az>Accelerometer z:</az>
+		    <br>
+		    <az id="accel_z"></az>
+		    <br>
+		    <ga>Gyro alpha:</ga>
+		    <br>
+		    <ga id="gyro_alpha"></ga>
+		    <br>
+		    <gb>Gyro beta:</gb>
+		    <br>
+		    <gb id="gyro_beta"></gb>
+		    <br>
+		    <gg>Gyro gamma:</gg>
+		    <br>
+		    <gg id="gyro_gamma"></gg>
+            <br>
+		    <gg>Compass x:</gg>
+		    <br>
+		    <gg id="compass_x"></gg>
+            <br>
+		    <gg>Compass y:</gg>
+		    <br>
+		    <gg id="compass_y"></gg>
+            <br>
+        </div>
+        <div id="CubeSVG">
+		    <svg id=svg0 height="800" width="800">
+                <polygon id=poly0 points="0,0 0,200 200,200 200,0" style="fill:rgb(200,0,0);stroke:rgb(200,0,0);stroke-width:5" />
+		        <line id="line4" x1="0" y1="0" x2="50" y2="50" style="stroke:rgb(0,100,200);stroke-width:10" />
+		        <line id="line5" x1="0" y1="200" x2="50" y2="250" style="stroke:rgb(0,100,200);stroke-width:10" />
+		        <line id="line6" x1="200" y1="200" x2="250" y2="250" style="stroke:rgb(0,100,200);stroke-width:10" />
+		        <line id="line7" x1="200" y1="0" x2="250" y2="50" style="stroke:rgb(0,100,200);stroke-width:10" />
+		        <line id="line8" x1="50" y1="50" x2="50" y2="250" style="stroke:rgb(0,200,100);stroke-width:10" />
+		        <line id="line9" x1="50" y1="250" x2="250" y2="250" style="stroke:rgb(0,200,100);stroke-width:10" />
+		        <line id="line10" x1="250" y1="250" x2="250" y2="50" style="stroke:rgb(0,200,100);stroke-width:10" />
+		        <line id="line11" x1="250" y1="50" x2="50" y2="50" style="stroke:rgb(0,200,100);stroke-width:10" />
+                <junk id="junk"></junk>
+		        <!--
+                <line id="gravSensed" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,0);stroke-width:10" />
+		        <line id="gravPrediction" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,0,255);stroke-width:10" />
+                <line id="rotationAxis" x1="0" y1="0" x2="0" y2="0" style="stroke:rgb(0,255,0);stroke-width:10" />
+                -->
+		    </svg>
+        </div>
+        <div id="debug">
+		    <br>
+            <d id="debug0"></d>
+            <br>
+		    <d id="debug1"></d>
+            <br>
+		    <!-- 
+		    <d id="debug2"></d>
+            <br>
+		    <d id="debug3"></d>
+            <br>
+		    <d id="debug4"></d>
+            <br>
+		    <d id="debug5"></d>
+            <br>
+		    <d id="debug6"></d>
+            <br>
+		    <d id="debug7"></d>
+            -->
+        </div>
+		<script src="utils.js"></script>
+		<script src="vectors.js"></script>
+        <script src="quaternions.js"></script>
+        <script src="cube.js"></script>
+	</body>
+</html>
