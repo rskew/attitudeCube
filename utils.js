@@ -56,3 +56,10 @@ function isNull(thing) {
         return false;
     }
 };
+
+
+function nodeListToArray(nl) {
+    var arr = [];
+    for (var i = 0, n; n = nl[i]; ++i) arr.push(n);
+    return arr;
+}
