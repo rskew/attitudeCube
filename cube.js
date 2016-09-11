@@ -191,6 +191,24 @@ function redFront() {
 };
 
 
+function isGreen(line) {
+    if (line.id.indexOf("green") != -1){
+        return true;
+    } else {
+        return false;
+    }
+};
+
+
+function isBlue(line) {
+    if (line.id.indexOf("blue") != -1) {
+        return true;
+    } else {
+        return false;
+    }
+};
+
+
 function drawCube() {
 
         rotateCube();
@@ -198,33 +216,43 @@ function drawCube() {
         // Draw lines between vertices of cube,
         //  vertices given by the vectors in cubeVecs
         var lines = document.getElementsByTagName('line');
+        var greenLines = nodeListToArray(lines).filter(isGreen);
+        var blueLines = nodeListToArray(lines).filter(isBlue);
 
         // Draw solid red face of cube
         var svg = document.getElementById('svg0');
         var poly = document.getElementById('poly0');
-        var junk = document.getElementById('junk');
+        var junk1 = document.getElementById('junk1');
+        var junk2 = document.getElementById('junk2');
         var line4 = document.getElementById('line4');
 
+
         if (redFront()) {
-                svg.insertBefore(poly,junk);
+                svg.insertBefore(poly,junk2);
+                greenLines.map((function (line){
+                                    svg.insertBefore(line,junk1)
+                                }), greenLines);
         } else {
-                svg.insertBefore(poly,line4);
+                svg.insertBefore(poly,junk1);
+                greenLines.map((function (line){
+                                    svg.insertBefore(line,junk2)
+                                }), greenLines);
         }
         var polyString = v_toPolyString([cubeVecs[0],cubeVecs[1],cubeVecs[2],cubeVecs[3]]);
         poly.setAttribute("points", polyString);
 
         for (i = 0; i<4; i++){
             // Green Face
-            lines[i+4].setAttribute("x1", cubeVecs[i+4].x * cubeScaleX + cubeOffset)
-            lines[i+4].setAttribute("y1", cubeVecs[i+4].y * cubeScaleY + cubeOffset)
-            lines[i+4].setAttribute("x2", cubeVecs[((i+1)%4)+4].x * cubeScaleX + cubeOffset)
-            lines[i+4].setAttribute("y2", cubeVecs[((i+1)%4)+4].y * cubeScaleY + cubeOffset)
+            greenLines[i].setAttribute("x1", cubeVecs[i+4].x * cubeScaleX + cubeOffset)
+            greenLines[i].setAttribute("y1", cubeVecs[i+4].y * cubeScaleY + cubeOffset)
+            greenLines[i].setAttribute("x2", cubeVecs[((i+1)%4)+4].x * cubeScaleX + cubeOffset)
+            greenLines[i].setAttribute("y2", cubeVecs[((i+1)%4)+4].y * cubeScaleY + cubeOffset)
 
             // Blue Lines
-            lines[i].setAttribute("x1", cubeVecs[i].x * cubeScaleX + cubeOffset)
-            lines[i].setAttribute("y1", cubeVecs[i].y * cubeScaleY + cubeOffset)
-            lines[i].setAttribute("x2", cubeVecs[i+4].x * cubeScaleX + cubeOffset)
-            lines[i].setAttribute("y2", cubeVecs[i+4].y * cubeScaleY + cubeOffset)
+            blueLines[i].setAttribute("x1", cubeVecs[i].x * cubeScaleX + cubeOffset)
+            blueLines[i].setAttribute("y1", cubeVecs[i].y * cubeScaleY + cubeOffset)
+            blueLines[i].setAttribute("x2", cubeVecs[i+4].x * cubeScaleX + cubeOffset)
+            blueLines[i].setAttribute("y2", cubeVecs[i+4].y * cubeScaleY + cubeOffset)
         }
 
         //// Sensed Grav Vector
