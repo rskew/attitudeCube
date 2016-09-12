@@ -73,15 +73,16 @@ var height = window.innerHeight
 var svg = document.getElementById('svg0');
 
 var svgDim = Math.min(height,width);
-svg.setAttribute("height", svgDim);
-svg.setAttribute("width", svgDim);
+svg.setAttribute("height", height);
+svg.setAttribute("width", width);
 
 var cubeMargin = 0.8;
 var cubeDim = svgDim * cubeMargin / (Math.sqrt(3) * 2.0);
 
 var cubeScaleX = cubeDim;
 var cubeScaleY = -cubeDim; // Y axis inverted to compensate for y-down canvas convention
-var cubeOffset = svgDim / 2.0;
+var cubeOffsetX = width / 2.0;
+var cubeOffsetY = height / 2.0;
 
 //// Read sensor values
 
@@ -176,8 +177,8 @@ function rotateCube() {
 
 function v_toPolyString(vs) {
         var vecstringer = function(v) {
-            var x = (v.x * cubeScaleX) + cubeOffset;
-            var y = (v.y * cubeScaleY) + cubeOffset;
+            var x = (v.x * cubeScaleX) + cubeOffsetX;
+            var y = (v.y * cubeScaleY) + cubeOffsetY;
             return (x.toString() + "," + y.toString());
         };
         var vstrs = vs.map(vecstringer);
@@ -243,30 +244,30 @@ function drawCube() {
 
         for (i = 0; i<4; i++){
             // Green Face
-            greenLines[i].setAttribute("x1", cubeVecs[i+4].x * cubeScaleX + cubeOffset)
-            greenLines[i].setAttribute("y1", cubeVecs[i+4].y * cubeScaleY + cubeOffset)
-            greenLines[i].setAttribute("x2", cubeVecs[((i+1)%4)+4].x * cubeScaleX + cubeOffset)
-            greenLines[i].setAttribute("y2", cubeVecs[((i+1)%4)+4].y * cubeScaleY + cubeOffset)
+            greenLines[i].setAttribute("x1", cubeVecs[i+4].x * cubeScaleX + cubeOffsetX)
+            greenLines[i].setAttribute("y1", cubeVecs[i+4].y * cubeScaleY + cubeOffsetY)
+            greenLines[i].setAttribute("x2", cubeVecs[((i+1)%4)+4].x * cubeScaleX + cubeOffsetX)
+            greenLines[i].setAttribute("y2", cubeVecs[((i+1)%4)+4].y * cubeScaleY + cubeOffsetY)
 
             // Blue Lines
-            blueLines[i].setAttribute("x1", cubeVecs[i].x * cubeScaleX + cubeOffset)
-            blueLines[i].setAttribute("y1", cubeVecs[i].y * cubeScaleY + cubeOffset)
-            blueLines[i].setAttribute("x2", cubeVecs[i+4].x * cubeScaleX + cubeOffset)
-            blueLines[i].setAttribute("y2", cubeVecs[i+4].y * cubeScaleY + cubeOffset)
+            blueLines[i].setAttribute("x1", cubeVecs[i].x * cubeScaleX + cubeOffsetX)
+            blueLines[i].setAttribute("y1", cubeVecs[i].y * cubeScaleY + cubeOffsetY)
+            blueLines[i].setAttribute("x2", cubeVecs[i+4].x * cubeScaleX + cubeOffsetX)
+            blueLines[i].setAttribute("y2", cubeVecs[i+4].y * cubeScaleY + cubeOffsetY)
         }
 
         //// Sensed Grav Vector
-        //lines[8].setAttribute("x1", cubeOffset);
-        //lines[8].setAttribute("y1", cubeOffset);
-        //lines[8].setAttribute("x2", accel_v_I.x * cubeScaleX + cubeOffset);
-        //lines[8].setAttribute("y2", accel_v_I.y * cubeScaleY + cubeOffset)
+        //lines[8].setAttribute("x1", cubeOffsetX);
+        //lines[8].setAttribute("y1", cubeOffsetY);
+        //lines[8].setAttribute("x2", accel_v_I.x * cubeScaleX + cubeOffsetX);
+        //lines[8].setAttribute("y2", accel_v_I.y * cubeScaleY + cubeOffsetY)
 
         //// Predicted grav vector from observed attitude state
-        //lines[9].setAttribute("x1", cubeOffset)
-        //lines[9].setAttribute("y1", cubeOffset)
+        //lines[9].setAttribute("x1", cubeOffsetX)
+        //lines[9].setAttribute("y1", cubeOffsetY)
         //var gravScale = 10;
-        //lines[9].setAttribute("x2", grav_v_I.x * cubeScaleX * gravScale + cubeOffset)
-        //lines[9].setAttribute("y2", grav_v_I.y * cubeScaleY * gravScale + cubeOffset)
+        //lines[9].setAttribute("x2", grav_v_I.x * cubeScaleX * gravScale + cubeOffsetX)
+        //lines[9].setAttribute("y2", grav_v_I.y * cubeScaleY * gravScale + cubeOffsetY)
 };
 
 
