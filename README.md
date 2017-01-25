@@ -8,6 +8,8 @@ Tested on my old iPhone 4, probably wont work on much else.
 
 On a desktop browser just displays a rotating cube screensaver.
 
+view at www.rowanskewes.com
+
 Design
 ---
 I've implemented basic vector and quaternion functionality as a learning exercise, I should probably find decent libraries for this low level stuff if this project gets any bigger :)
