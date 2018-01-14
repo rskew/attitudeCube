@@ -23,7 +23,7 @@ var v_smoothAccel = v_lpfFactory(0.0);
 var gyro = {alpha: 0, beta: 0, gamma:0};
 var gyroSum = {alpha: 0, beta: 0, gamma:0};
 
-var hasSensors = true;
+var hasSensors = false;
 
 var north_v_I = new Vector(0,1,0);
 var heading_I = 0;
@@ -131,10 +131,14 @@ function showData(d){
 function printData() {
     if (not(hasSensors)) {
         var el = document.getElementById( 'SensorReadings' );
-        if (el) {
-            el.parentNode.removeChild( el );
-        }
+        //if (el) {
+        el.style.display = "none";
+        //el.parentNode.removeChild( el );
+        //}
         return;
+    } else {
+        var el = document.getElementById( 'SensorReadings' );
+        el.style.display = "block";
     }
 
     document.getElementById("accel_x").innerHTML = showData(accel_v_B.x);
@@ -193,7 +197,7 @@ function v_toPolyString(vs) {
 
 
 function isColour(colour) {
-    function _(line) {
+    return function _(line) {
         if (line.id.indexOf(colour) != -1) {
             return true;
         } else {
@@ -252,8 +256,8 @@ function drawCube() {
             // Red Lines
             redLines[i].setAttribute("x1", cubeVecs[i].x * cubeScaleX + cubeOffsetX)
             redLines[i].setAttribute("y1", cubeVecs[i].y * cubeScaleY + cubeOffsetY)
-            redLines[i].setAttribute("x2", cubeVecs[i+1].x * cubeScaleX + cubeOffsetX)
-            redLines[i].setAttribute("y2", cubeVecs[i+1].y * cubeScaleY + cubeOffsetY)
+            redLines[i].setAttribute("x2", cubeVecs[(i+1)%4].x * cubeScaleX + cubeOffsetX)
+            redLines[i].setAttribute("y2", cubeVecs[(i+1)%4].y * cubeScaleY + cubeOffsetY)
         }
 
         //// Sensed Grav Vector
@@ -268,6 +272,10 @@ function drawCube() {
         //var gravScale = 10;
         //lines[9].setAttribute("x2", grav_v_I.x * cubeScaleX * gravScale + cubeOffsetX)
         //lines[9].setAttribute("y2", grav_v_I.y * cubeScaleY * gravScale + cubeOffsetY)
+
+
+        var el = document.getElementById( 'CubeSVG' );
+        el.style.display = "block";
 };
 
 
@@ -351,6 +359,7 @@ function updateAttitude() {
     }
 };
 
+printData();
 window.setInterval(printData, 1);
 window.addEventListener('devicemotion', handleMotionEvent, false);
 window.addEventListener('deviceorientation', handleCompassEvent, false);
